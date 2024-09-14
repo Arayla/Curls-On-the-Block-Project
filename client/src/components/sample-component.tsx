@@ -5,7 +5,7 @@ async function callServer(): Promise<void> {
   try {
     const response = await axios.get("http://localhost:8000/test", {
       params: {
-        table: "sample",
+        table: "styles",
       },
     });
     console.log(response.data);

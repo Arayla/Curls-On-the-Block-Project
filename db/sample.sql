@@ -28,20 +28,23 @@ SET time_zone = "+00:00";
 -- Table structure for table `sample`
 --
 
-CREATE TABLE `sample` (
-  `id` int(255) NOT NULL,
-  `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+create table styles
+(
+	style_name VARCHAR(100),
+  style_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  primary key (style_id)
+);
 
 --
 -- Dumping data for table `sample`
 --
 
-INSERT INTO `sample` (`id`, `name`) VALUES
-(1, 'andrew'),
-(2, 'brian'),
-(3, 'charles'),
-(4, 'david');
+-- Insert Dummy Data
+insert into styles(style_name) values
+('Braids'),
+('French Twist'),
+('Pony Tail'),
+('Bun');
 
 --
 -- Indexes for dumped tables
@@ -50,8 +53,6 @@ INSERT INTO `sample` (`id`, `name`) VALUES
 --
 -- Indexes for table `sample`
 --
-ALTER TABLE `sample`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -60,9 +61,6 @@ ALTER TABLE `sample`
 --
 -- AUTO_INCREMENT for table `sample`
 --
-ALTER TABLE `sample`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
