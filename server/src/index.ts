@@ -5,6 +5,9 @@ import process from 'process';
 
 const app = express();
 
+// Middleware to parse JSON requests
+app.use(express.json()); // This will parse incoming JSON bodies
+
 // Create a connection pool for MySQL
 const pool: Pool = mysql.createPool({
     host: process.env.MYSQL_HOST_IP,
@@ -33,6 +36,31 @@ app.get('/test', (req: Request, res: Response) => {
 
     // Perform MySQL query with parameterized query to avoid SQL injection
     pool.query(`SELECT * FROM ??`, [table], (err: MysqlError | null, results: any) => {
+        if (err) {
+            return res.status(500).send(err.message); // Send error message as response
+        } else {
+            return res.json(results); // Send query results as JSON response
+        }
+    });
+});
+
+// Define a route to handle POST requests for inserting data
+app.post('/test', (req: Request, res: Response) => {
+    console.log(`POST request received: ${JSON.stringify(req.body)}`);
+    const { table, data } = req.body;
+
+    // Ensure table name is a string
+    if (typeof table !== 'string') {
+        return res.status(400).send('Invalid table name');
+    }
+
+    // Ensure data is an object
+    if (typeof data !== 'object') {
+        return res.status(400).send('Invalid data object');
+    }
+
+    // Perform MySQL query with parameterized query to avoid SQL injection
+    pool.query(`INSERT INTO ?? SET ?`, [table, data], (err: MysqlError | null, results: any) => {
         if (err) {
             return res.status(500).send(err.message); // Send error message as response
         } else {

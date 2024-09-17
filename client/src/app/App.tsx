@@ -1,8 +1,13 @@
 import React from "react";
-import { SampleComponent } from "../components";
+import { SampleComponent, SampleInsert } from "../components";
 
 function App() {
-  return <SampleComponent />;
+  return (
+    <>
+      <SampleComponent />
+      <SampleInsert />
+    </>
+  );
 }
 
 export default App;
