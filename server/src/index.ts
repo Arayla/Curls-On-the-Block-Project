@@ -68,3 +68,25 @@ app.post('/test', (req: Request, res: Response) => {
         }
     });
 });
+
+// Define a route to handle DELETE requests
+app.delete('/test/:id', (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    // Ensure ID is a valid number
+    if (isNaN(Number(id))) {
+        return res.status(400).send('Invalid ID');
+    }
+
+    // Perform MySQL query with parameterized query to avoid SQL injection
+    pool.query(`DELETE FROM styles WHERE style_id = ?`, [id], (err: MysqlError | null, results: any) => {
+        if (err) {
+            return res.status(500).send(err.message); // Send error message as response
+        } else if (results.affectedRows === 0) {
+            return res.status(404).send('Style not found');
+        } else {
+            return res.status(200).send(`Style with ID ${id} deleted successfully`);
+        }
+    });
+});
+

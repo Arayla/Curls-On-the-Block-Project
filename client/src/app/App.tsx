@@ -1,11 +1,10 @@
 import React from "react";
-import { SampleComponent, SampleInsert } from "../components";
+import { TableExample } from "../components";
 
 function App() {
   return (
     <>
-      <SampleComponent />
-      <SampleInsert />
+      <TableExample />
     </>
   );
 }
