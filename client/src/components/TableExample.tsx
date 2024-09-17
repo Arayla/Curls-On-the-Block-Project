@@ -45,6 +45,30 @@ async function deleteStyle(
   }
 }
 
+//Function to update a style by `style_id`
+async function updateStyle(
+  style_id: number,
+  updatedStyle: string,
+  setStyles: React.Dispatch<
+    React.SetStateAction<Array<{ style_id: number; style_name: string }>>
+  >
+): Promise<void> {
+  try {
+    console.log(`Attempting to update style with ID: ${style_id}`); // Debugging log
+    console.log(`New style name: ${updatedStyle}`); // Debugging log
+    // Sending update request to the server
+    const response = await axios.put(`http://localhost:8000/test/${style_id}`, {
+      style_name: updatedStyle,
+    });
+    console.log(`Update response: ${response.data}`);
+
+    // Fetching updated data from the server after update
+    callServer(setStyles); // Refresh the table after update
+  } catch (error) {
+    console.error("Error updating style:", error);
+  }
+}
+
 // Function to insert a new style
 async function insertStyle(
   newStyle: string,
@@ -127,6 +151,20 @@ export function TableExample(): JSX.Element {
                     }}
                   >
                     Delete
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      const updatedStyle = prompt(
+                        "Enter new style name:",
+                        style.style_name
+                      );
+                      if (updatedStyle) {
+                        updateStyle(style.style_id, updatedStyle, setStyles); // Update style and refresh table
+                      }
+                    }}
+                  >
+                    Update
                   </button>
                 </td>
               </tr>

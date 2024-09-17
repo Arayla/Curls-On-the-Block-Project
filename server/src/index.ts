@@ -90,3 +90,32 @@ app.delete('/test/:id', (req: Request, res: Response) => {
     });
 });
 
+// Define a route to handle PUT requests
+app.put('/test/:id', (req: Request, res: Response) => {
+    const { id } = req.params;
+    const data = req.body; // Directly use req.body instead of req.body.data
+    console.log(`Id: ${id}, Data: ${JSON.stringify(data)}`);
+
+    // Ensure ID is a valid number
+    if (isNaN(Number(id))) {
+        return res.status(400).send('Invalid ID');
+    }
+
+    // Ensure data is an object
+    if (typeof data !== 'object') {
+        return res.status(400).send('Invalid data object');
+    }
+
+    // Perform MySQL query with parameterized query to avoid SQL injection
+    pool.query(`UPDATE styles SET ? WHERE style_id = ?`, [data, id], (err: MysqlError | null, results: any) => {
+        if (err) {
+            return res.status(500).send(err.message); // Send error message as response
+        } else if (results.affectedRows === 0) {
+            return res.status(404).send('Style not found');
+        } else {
+            return res.status(200).send(`Style with ID ${id} updated successfully`);
+        }
+    });
+});
+
+
