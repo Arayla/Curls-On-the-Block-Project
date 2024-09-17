@@ -47,6 +47,11 @@ insert into styles(style_name) values
 ('Bun');
 
 --
+-- Commit the transaction to save the changes
+--
+COMMIT;
+
+--
 -- Indexes for dumped tables
 --
 
