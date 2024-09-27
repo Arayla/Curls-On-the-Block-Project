@@ -155,7 +155,11 @@ insert into products(full_product_name, brand,category_name,price_per_container,
 ('Product15','Brand1','Mousse',15,2,3,2,1,2,1),
 ('Product16','Brand1','Shampoo',23,2.4,3,1,3,2,5),
 ('Product17','Brand2','Mousse',15,1.5,3,2,2,3,1),
-('Product18','Brand2','Detangler',13,2,3,3,2,4,3);
+('Product18','Brand2','Detangler',13,2,3,3,2,4,3),
+('Product19','Brand1','Gel',25,2,2,2,2,2,2),
+('Product20','Brand2','Gel',25,1,2,3,4,5,1),
+('Product21','Brand3','Gel',25,4,1,1,3,2,1),
+('Product22','Brand4','Gel',25,3,5,3,1,1,2),
 
 insert into products_has_ingredients(ingredient_id,product_id) values
 (1,1),(1,3),(1,4),(1,15),(1,13),(2,18),(2,5),(2,4),(2,1),(2,12),

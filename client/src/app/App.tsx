@@ -6,7 +6,7 @@ import { SelectCurlType } from "../components/select_curltype";
 import { SelectLength } from "../components/select_length";
 import { SelectCategory } from "../components/select_category";
 import { SelectStyles } from "../components/select_style";
-import StyleCategorySelector from "../components/select_combo"; // Ensure this is the correct import
+import StyleCategorySelector from "../components/select_combo"; 
 import { QueryButton } from "../components/query_button";
 
 function App() {
