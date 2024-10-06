@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { SelectPorosity } from "../components/select_porosity";
-import { SelectCourse } from "../components/select_course";
-import { SelectThickness } from "../components/select_thickness";
-import { SelectCurlType } from "../components/select_curltype";
-import { SelectLength } from "../components/select_length";
-import { SelectCategory } from "../components/select_category";
-import { SelectStyles } from "../components/select_style";
-import StyleCategorySelector from "../components/select_combo"; 
-import { QueryButton } from "../components/query_button";
+import { SelectPorosity } from "../components/SelectPorosity";
+import { SelectCourse } from "../components/SelectCourse";
+import { SelectThickness } from "../components/SelectThickness";
+import { SelectCurlType } from "../components/SelectCurltype";
+import { SelectLength } from "../components/SelectLength";
+import { SelectCategory } from "../components/SelectCategory";
+import { SelectStyles } from "../components/SelectStyle";
+import StyleCategorySelector from "../components/SelectCombo";
+import { QueryButton } from "../components/QueryButton";
+import SearchParamFields from "../components/SearchParamFields";
 
 function App() {
   const [porosityVal, setPorosityVal] = useState<number>(0);
@@ -20,7 +21,9 @@ function App() {
   const [selectorType, setSelectorType] = useState<string>(""); // To differentiate between style or product based search
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // Multiple categories for style-based search
 
-  const handleSelectorChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectorChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setSelectorType(event.target.value);
     if (event.target.value === "style") {
       setStyleVal(""); // Reset style value when changing selector
@@ -61,16 +64,16 @@ function App() {
   return (
     <div>
       {/* Input selectors */}
-      <SelectPorosity selectedOption={porosityVal} onChange={setPorosityVal} />
-      <SelectCourse selectedOption={courseVal} onChange={setCourseVal} />
-      <SelectThickness selectedOption={thicknessVal} onChange={setThicknessVal} />
-      <SelectCurlType selectedOption={curlTypeVal} onChange={setCurlTypeVal} />
-      <SelectLength selectedOption={lengthVal} onChange={setLengthVal} />
+      <SearchParamFields />
 
       {/* Search type selector */}
       <div>
         <label htmlFor="selector">Choose a search type:</label>
-        <select id="selector" value={selectorType} onChange={handleSelectorChange}>
+        <select
+          id="selector"
+          value={selectorType}
+          onChange={handleSelectorChange}
+        >
           <option value="">Select an option</option>
           <option value="category">Product Based</option>
           <option value="style">Style Based</option>
@@ -79,7 +82,10 @@ function App() {
 
       {/* Category based search */}
       {selectorType === "category" && (
-        <SelectCategory selectedOption={categoryVal} onChange={setCategoryVal} />
+        <SelectCategory
+          selectedOption={categoryVal}
+          onChange={setCategoryVal}
+        />
       )}
 
       {/* Style based search */}
@@ -87,9 +93,9 @@ function App() {
         <>
           <SelectStyles selectedOption={styleVal} onChange={setStyleVal} />
           {styleVal && (
-            <StyleCategorySelector 
-              onCategoryChange={handleCategoryChange} 
-              styleVal={styleVal} 
+            <StyleCategorySelector
+              onCategoryChange={handleCategoryChange}
+              styleVal={styleVal}
             />
           )}
         </>
@@ -103,13 +109,17 @@ function App() {
           thicknessVal={thicknessVal}
           curlTypeVal={curlTypeVal}
           lengthVal={lengthVal}
-          categoryVal={selectorType === "category" ? categoryVal : selectedCategories.join(", ")} // Pass categories based on selection type
+          categoryVal={
+            selectorType === "category"
+              ? categoryVal
+              : selectedCategories.join(", ")
+          } // Pass categories based on selection type
         />
       )}
 
       {/* Warning if not all fields are selected */}
       {!isAllSelected() && (
-        <div style={{ color: 'red' }}>Please fill out all fields.</div>
+        <div style={{ color: "red" }}>Please fill out all fields.</div>
       )}
     </div>
   );
