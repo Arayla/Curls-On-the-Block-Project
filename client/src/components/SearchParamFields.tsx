@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import InputField from "./InputField";
+import { SearchParams } from "../types";
 
-interface SearchParamFieldProps {}
+// Props passed to component
+interface SearchFieldProps {
+  searchParams: SearchParams;
+  setSearchParams: React.Dispatch<React.SetStateAction<SearchParams>>;
+}
 
-export const SearchParamFields: React.FC<SearchParamFieldProps> = ({}) => {
-  const [porosity, setPorosity] = useState<number>(0);
-
+// Field for constant search parameters (not dependant on API call)
+export const SearchParamFields: React.FC<SearchFieldProps> = ({
+  searchParams,
+  setSearchParams,
+}) => {
   return (
     <>
       <InputField
-        defaultText="Select Porosity:"
+        label="Select Porosity:"
         listItems={[
           "Select a value",
           "Not very",
@@ -19,22 +26,77 @@ export const SearchParamFields: React.FC<SearchParamFieldProps> = ({}) => {
           "Above average",
           "Very",
         ]}
-        selectedOption={porosity}
-        onChange={setPorosity}
+        selectedOption={searchParams.porosity}
+        onChange={(newVal: number) => {
+          setSearchParams({ ...searchParams, porosity: newVal });
+        }}
+      />
+      <InputField
+        label="Select Courseness:"
+        listItems={[
+          "Select a value",
+          "Not very",
+          "Somewhat",
+          "Average",
+          "Above average",
+          "Very",
+        ]}
+        selectedOption={searchParams.courseness}
+        onChange={(newVal: number) => {
+          setSearchParams({ ...searchParams, courseness: newVal });
+        }}
+      />
+      <InputField
+        label="Select Thickness:"
+        listItems={[
+          "Select a value",
+          "Not very",
+          "Somewhat",
+          "Average",
+          "Above average",
+          "Very",
+        ]}
+        selectedOption={searchParams.thickness}
+        onChange={(newVal: number) => {
+          setSearchParams({ ...searchParams, thickness: newVal });
+        }}
+      />
+      <InputField
+        label="Select Curl Type:"
+        listItems={[
+          "Select a value",
+          "2A",
+          "2B",
+          "2C",
+          "3A",
+          "3B",
+          "3C",
+          "4A",
+          "4B",
+          "4C",
+        ]}
+        selectedOption={searchParams.curlType}
+        onChange={(newVal: number) => {
+          setSearchParams({ ...searchParams, curlType: newVal });
+        }}
+      />
+      <InputField
+        label="Select Length:"
+        listItems={[
+          "Select a length",
+          "Short",
+          "Somewhat short",
+          "Average length",
+          "Long",
+          "Very long",
+        ]}
+        selectedOption={searchParams.length}
+        onChange={(newVal: number) => {
+          setSearchParams({ ...searchParams, length: newVal });
+        }}
       />
     </>
   );
-
-  {
-    /* <SelectPorosity selectedOption={porosityVal} onChange={setPorosityVal} />
-      <SelectCourse selectedOption={courseVal} onChange={setCourseVal} />
-      <SelectThickness
-        selectedOption={thicknessVal}
-        onChange={setThicknessVal}
-      />
-      <SelectCurlType selectedOption={curlTypeVal} onChange={setCurlTypeVal} />
-      <SelectLength selectedOption={lengthVal} onChange={setLengthVal} /> */
-  }
 };
 
 export default SearchParamFields;

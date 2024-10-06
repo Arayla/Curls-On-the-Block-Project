@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { SelectPorosity } from "../components/SelectPorosity";
-import { SelectCourse } from "../components/SelectCourse";
-import { SelectThickness } from "../components/SelectThickness";
-import { SelectCurlType } from "../components/SelectCurltype";
-import { SelectLength } from "../components/SelectLength";
 import { SelectCategory } from "../components/SelectCategory";
 import { SelectStyles } from "../components/SelectStyle";
 import StyleCategorySelector from "../components/SelectCombo";
 import { QueryButton } from "../components/QueryButton";
 import SearchParamFields from "../components/SearchParamFields";
+import { SearchParams } from "../types";
 
 function App() {
-  const [porosityVal, setPorosityVal] = useState<number>(0);
-  const [courseVal, setCourseVal] = useState<number>(0);
-  const [thicknessVal, setThicknessVal] = useState<number>(0);
-  const [curlTypeVal, setCurlTypeVal] = useState<number>(0);
-  const [lengthVal, setLengthVal] = useState<number>(0);
+  const [searchParams, setSearchParams] = useState<SearchParams>({
+    porosity: 0,
+    courseness: 0,
+    thickness: 0,
+    curlType: 0,
+    length: 0,
+  });
   const [categoryVal, setCategoryVal] = useState<string>(""); // Single category for product-based search
   const [styleVal, setStyleVal] = useState<string>(""); // For style selection
   const [selectorType, setSelectorType] = useState<string>(""); // To differentiate between style or product based search
@@ -36,12 +34,9 @@ function App() {
   const isAllSelected = () => {
     if (selectorType === "category") {
       return (
-        porosityVal !== 0 &&
-        courseVal !== 0 &&
-        thicknessVal !== 0 &&
-        curlTypeVal !== 0 &&
-        lengthVal !== 0 &&
-        categoryVal !== ""
+        // Check if any value in searchParams is 0
+        Object.values(searchParams).some((value) => value === 0) &&
+        categoryVal !== "" // category must be chosen
       );
     } else if (selectorType === "style") {
       return styleVal !== "" && selectedCategories.length > 0; // Check if style and categories are selected
@@ -64,7 +59,10 @@ function App() {
   return (
     <div>
       {/* Input selectors */}
-      <SearchParamFields />
+      <SearchParamFields
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
+      />
 
       {/* Search type selector */}
       <div>
@@ -103,18 +101,19 @@ function App() {
 
       {/* Render query button when all values are selected */}
       {isAllSelected() && (
-        <QueryButton
-          porosityVal={porosityVal}
-          courseVal={courseVal}
-          thicknessVal={thicknessVal}
-          curlTypeVal={curlTypeVal}
-          lengthVal={lengthVal}
-          categoryVal={
-            selectorType === "category"
-              ? categoryVal
-              : selectedCategories.join(", ")
-          } // Pass categories based on selection type
-        />
+        <div>all selected</div>
+        // <QueryButton
+        //   porosityVal={porosityVal}
+        //   courseVal={courseVal}
+        //   thicknessVal={thicknessVal}
+        //   curlTypeVal={curlTypeVal}
+        //   lengthVal={lengthVal}
+        //   categoryVal={
+        //     selectorType === "category"
+        //       ? categoryVal
+        //       : selectedCategories.join(", ")
+        //   } // Pass categories based on selection type
+        // />
       )}
 
       {/* Warning if not all fields are selected */}
