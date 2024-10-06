@@ -10,6 +10,9 @@ COPY package-lock.json /app
 # Install dependencies
 RUN npm install
 
+# Create a dedicated volume for node_modules to prevent local development overwrites
+VOLUME /app/node_modules
+
 # Copy the rest of the application code to the working directory
 COPY . .
 
