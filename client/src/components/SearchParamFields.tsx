@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import InputField from "./InputField";
-import { SearchParams } from "../types";
+import {
+  SearchParams,
+  SEARCH_NOT_SPECIFIED,
+  SEARCH_CATEGORIES,
+  SEARCH_STYLES,
+} from "../types";
 
 // Props passed to component
 interface SearchFieldProps {
@@ -9,11 +14,43 @@ interface SearchFieldProps {
   setSearchParams: React.Dispatch<React.SetStateAction<SearchParams>>;
 }
 
+async function callServer(
+  endpoint: string,
+  setDropdown: React.Dispatch<React.SetStateAction<Array<string>>>
+): Promise<void> {
+  try {
+    // Fetching data from the server
+    const response = await axios.get(endpoint, {
+      params: {
+        table: "styles",
+      },
+    });
+
+    // Updating the state with the fetched data
+    let stringArr: Array<string> = response.data.map(
+      (item: { category_name: string; style_name: string }) =>
+        item.category_name ? item.category_name : item.style_name
+    );
+    setDropdown(stringArr);
+  } catch (error) {
+    console.error("Error calling server:", error);
+  }
+}
+
 // Field for constant search parameters (not dependant on API call)
 export const SearchParamFields: React.FC<SearchFieldProps> = ({
   searchParams,
   setSearchParams,
 }) => {
+  const [categories, setCategories] = useState<Array<string>>(["Loading..."]);
+  const [styles, setStyles] = useState<Array<string>>(["Loading..."]);
+
+  // useEffect hook to call the server when the component mounts
+  useEffect(() => {
+    callServer("http://localhost:8000/styles", setStyles);
+    callServer("http://localhost:8000/categories", setCategories);
+  }, [searchParams.searchType]);
+
   return (
     <>
       <InputField
@@ -95,6 +132,35 @@ export const SearchParamFields: React.FC<SearchFieldProps> = ({
           setSearchParams({ ...searchParams, length: newVal });
         }}
       />
+      <InputField
+        label="Select a Search Type:"
+        listItems={["Select a search type", "Style based", "Product based"]}
+        selectedOption={searchParams.searchType}
+        onChange={(newVal: number) => {
+          setSearchParams({ ...searchParams, searchType: newVal });
+        }}
+      />
+
+      {searchParams.searchType === SEARCH_CATEGORIES && (
+        <InputField
+          label="Select Category:"
+          listItems={categories}
+          selectedOption={categories.indexOf(searchParams.category)}
+          onChange={(newVal: number) => {
+            setSearchParams({ ...searchParams, category: categories[newVal] });
+          }}
+        />
+      )}
+      {searchParams.searchType === SEARCH_STYLES && (
+        <InputField
+          label="Select Style:"
+          listItems={styles}
+          selectedOption={styles.indexOf(searchParams.style)}
+          onChange={(newVal: number) => {
+            setSearchParams({ ...searchParams, style: styles[newVal] });
+          }}
+        />
+      )}
     </>
   );
 };

@@ -8,11 +8,14 @@ import { SearchParams } from "../types";
 
 function App() {
   const [searchParams, setSearchParams] = useState<SearchParams>({
+    searchType: 0,
     porosity: 0,
     courseness: 0,
     thickness: 0,
     curlType: 0,
     length: 0,
+    category: "",
+    style: "",
   });
   const [categoryVal, setCategoryVal] = useState<string>(""); // Single category for product-based search
   const [styleVal, setStyleVal] = useState<string>(""); // For style selection
@@ -65,7 +68,7 @@ function App() {
       />
 
       {/* Search type selector */}
-      <div>
+      {/* <div>
         <label htmlFor="selector">Choose a search type:</label>
         <select
           id="selector"
@@ -76,10 +79,10 @@ function App() {
           <option value="category">Product Based</option>
           <option value="style">Style Based</option>
         </select>
-      </div>
+      </div> */}
 
       {/* Category based search */}
-      {selectorType === "category" && (
+      {/* {selectorType === "category" && (
         <SelectCategory
           selectedOption={categoryVal}
           onChange={setCategoryVal}
@@ -87,7 +90,7 @@ function App() {
       )}
 
       {/* Style based search */}
-      {selectorType === "style" && (
+      {/* {selectorType === "style" && (
         <>
           <SelectStyles selectedOption={styleVal} onChange={setStyleVal} />
           {styleVal && (
@@ -97,7 +100,7 @@ function App() {
             />
           )}
         </>
-      )}
+      )} */}
 
       {/* Render query button when all values are selected */}
       {isAllSelected() && (
