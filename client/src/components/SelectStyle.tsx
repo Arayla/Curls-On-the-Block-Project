@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+// import {S};
 
 interface SelectStyleProps {
   selectedOption: string; // State variable to hold the selected style
   onChange: (value: string) => void; // Callback function to update the state
 }
 
-export const SelectStyles: React.FC<SelectStyleProps> = ({ selectedOption, onChange }) => {
+export const SelectStyles: React.FC<SelectStyleProps> = ({
+  selectedOption,
+  onChange,
+}) => {
   const [styles, setStyles] = useState<string[]>([]); // State to store styles
   const [loading, setLoading] = useState<boolean>(true); // Loading state
   const [error, setError] = useState<string | null>(null); // Error state
@@ -15,7 +19,9 @@ export const SelectStyles: React.FC<SelectStyleProps> = ({ selectedOption, onCha
     const fetchStyles = async () => {
       try {
         const response = await axios.get("http://localhost:8000/styles"); // Fetch from /styles endpoint
-        setStyles(response.data.map((item: { style_name: string }) => item.style_name)); // Map response to style names
+        setStyles(
+          response.data.map((item: { style_name: string }) => item.style_name)
+        ); // Map response to style names
       } catch (err) {
         setError("Error fetching styles");
       } finally {
