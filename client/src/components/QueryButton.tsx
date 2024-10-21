@@ -24,7 +24,9 @@ export const QueryButton: React.FC<QueryButtonProps> = ({
   const handleClick = async () => {
     console.log("Button clicked");
 
-    const categories = categoryVal.split(",").map(category => category.trim()); // Split by comma and remove extra spaces
+    const categories = categoryVal
+      .split(",")
+      .map((category) => category.trim()); // Split by comma and remove extra spaces
 
     setResults([]); // Clear previous results
     setError(null); // Clear any previous errors
@@ -46,13 +48,17 @@ export const QueryButton: React.FC<QueryButtonProps> = ({
       console.log(requestData);
 
       try {
-        const response = await axios.post("http://localhost:8000/products/search", requestData);
-        
+        const response = await axios.post(
+          "http://localhost:8000/products/search",
+          requestData
+        );
+
         // Append new results to the existing results array
-        setResults(prevResults => [...prevResults, ...response.data]);
+        setResults((prevResults) => [...prevResults, ...response.data]);
         setError(null);
       } catch (err) {
-        const errorMessage = (err as Error).message || "Error fetching products";
+        const errorMessage =
+          (err as Error).message || "Error fetching products";
         setError(errorMessage);
         setResults([]); // Clear results if there's an error
         break; // Stop if an error occurs

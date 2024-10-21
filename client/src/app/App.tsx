@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { SelectCategory } from "../components/SelectCategory";
-import { SelectStyles } from "../components/SelectStyle";
-import StyleCategorySelector from "../components/SelectCombo";
-import { QueryButton } from "../components/QueryButton";
-import SearchParamFields from "../components/SearchParamFields";
+// import { SelectCategory } from "../components/SelectCategory";
+// import { SelectStyles } from "../components/SelectStyle";
+// import StyleCategorySelector from "../components/SelectCombo";
+// import { QueryButton } from "../components/QueryButton";
+import SearchParamForm from "../components/SearchParamForm";
 import { SearchParams } from "../types";
 
 function App() {
@@ -62,7 +62,7 @@ function App() {
   return (
     <div>
       {/* Input selectors */}
-      <SearchParamFields
+      <SearchParamForm
         searchParams={searchParams}
         setSearchParams={setSearchParams}
       />

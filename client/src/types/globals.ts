@@ -1,4 +1,6 @@
 // interface for actual parameters of search
+export interface Product {}
+
 export interface SearchParams {
   searchType: number;
   porosity: number;
