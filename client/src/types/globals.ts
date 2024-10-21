@@ -1,6 +1,19 @@
-// interface for actual parameters of search
-export interface Product {}
+// interface matching product json returned by server
+export interface Product {
+  product_id: number;
+  full_product_name: string;
+  brand: string;
+  category_name: string;
+  price_per_container: number;
+  price_per_oz: number;
+  porosity_score: number;
+  course_score: number;
+  density_score: number;
+  length_score: number;
+  curl_type: number;
+}
 
+// interface for parameters of search
 export interface SearchParams {
   searchType: number;
   porosity: number;

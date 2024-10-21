@@ -51,7 +51,7 @@ export async function Search(
     listCategories = [searchParams.category];
   console.log(listCategories);
 
-  let results: Array<string> = [];
+  let results: Array<Product> = [];
 
   // Iterate over each category and make separate API calls
   for (const category of listCategories) {

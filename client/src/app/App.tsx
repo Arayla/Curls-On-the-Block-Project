@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 // import { QueryButton } from "../components/QueryButton";
 import SearchParamForm from "../components/SearchParamForm";
 import { SearchParams, Product } from "../types";
+import { ProductContainer } from "../components/ProductContainer";
 
 function App() {
   const [searchParams, setSearchParams] = useState<SearchParams>({
@@ -61,16 +62,18 @@ function App() {
   //   console.log("Selected categories:", selectedCategories); // Log selected categories
   // }, [selectedCategories]);
 
-  const showProds = (products: Array<Product>) => {
-    let str: string = "";
-    for (const product of products) {
-      str += JSON.stringify(product) + ",";
-    }
-    return str;
+  const ShowProducts = (products: Array<Product>) => {
+    const productContainers: Array<JSX.Element> = [];
+
+    products.forEach((product) => {
+      productContainers.push(<ProductContainer product={product} />);
+    });
+
+    return productContainers;
   };
 
   return (
-    <div>
+    <>
       {/* Input selectors */}
       <div>
         <SearchParamForm
@@ -80,8 +83,12 @@ function App() {
         />
       </div>
 
-      {products.length !== 0 && <div>{showProds(products)}</div>}
-    </div>
+      {
+        products.length !== 0 && ShowProducts(products)
+        // products.forEach((product) => {
+        //   return <ProductContainer product={product} />;
+      }
+    </>
   );
 }
 
