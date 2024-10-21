@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import InputField from "./InputField";
 import {
   SearchParams,
@@ -14,16 +14,17 @@ import { Product } from "../types";
 interface SearchFormProps {
   searchParams: SearchParams;
   setSearchParams: React.Dispatch<React.SetStateAction<SearchParams>>;
+  setResults: React.Dispatch<React.SetStateAction<Product[]>>;
 }
 
 // Field for constant search parameters (not dependant on API call)
 export const SearchParamForm: React.FC<SearchFormProps> = ({
   searchParams,
   setSearchParams,
+  setResults,
 }) => {
   const [categories, setCategories] = useState<Array<string>>(["Loading..."]);
   const [styles, setStyles] = useState<Array<string>>(["Loading..."]);
-  const [results, setResults] = useState<Array<Product>>([]);
 
   // useEffect hook to call the server when the component mounts
   useEffect(() => {
@@ -33,12 +34,10 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
   const handleSubmit = () => {
     console.log("Submitted");
     Search(searchParams, setResults, categories);
-    console.log(results);
   };
 
   return (
     <>
-      {/* <form onSubmit={handleSubmit}> */}
       <InputField
         label="Select Porosity:"
         listItems={[
@@ -153,7 +152,6 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
       <button type="submit" onClick={handleSubmit}>
         Search
       </button>
-      {/* </form> */}
     </>
   );
 };

@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { SearchParams, Product, SEARCH_CATEGORIES } from "../types";
 
-interface QueryButtonProps {
-  porosityVal: number;
-  courseVal: number;
-  thicknessVal: number;
-  curlTypeVal: number;
-  lengthVal: number;
-  categoryVal: string; // This will be a comma-separated string, like "Gel, Mousse"
-}
+// interface QueryButtonProps {
+//   porosityVal: number;
+//   courseVal: number;
+//   thicknessVal: number;
+//   curlTypeVal: number;
+//   lengthVal: number;
+//   categoryVal: string; // This will be a comma-separated string, like "Gel, Mousse"
+// }
 
 // interface SearchParams {
 //     searchType: number;
@@ -81,17 +81,5 @@ export async function Search(
 
   setResults(results);
 }
-
-// return (
-// <div>
-//   <button onClick={handleClick}>Execute SQL Query</button>
-//   {error && <div style={{ color: "red" }}>{error}</div>}
-//   <ul>
-//     {results.map((result, index) => (
-//       <li key={index}>{JSON.stringify(result)}</li>
-//     ))}
-//   </ul>
-// </div>
-// );
 
 export default Search;
