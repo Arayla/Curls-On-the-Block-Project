@@ -25,11 +25,19 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
 }) => {
   const [categories, setCategories] = useState<Array<string>>(["Loading..."]);
   const [styles, setStyles] = useState<Array<string>>(["Loading..."]);
+  const [combos, setCombos] = useState<Array<string>>([]);
 
   // useEffect hook to call the server when the component mounts
   useEffect(() => {
+    // console.log("Getting styles and categories...");
     getStylesCategories(setStyles, setCategories);
   }, [searchParams.searchType]);
+
+  // call the server for combos when styles is changed
+  useEffect(() => {
+    setSearchParams({ ...searchParams, category: "" });
+    // get;
+  }, [styles]);
 
   const handleSubmit = () => {
     console.log("Submitted");
@@ -125,6 +133,8 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
           setSearchParams({ ...searchParams, searchType: newVal });
         }}
       />
+
+      {/* Search by Category */}
       {searchParams.searchType === SEARCH_CATEGORIES && (
         <InputField
           label="Select Category:"
@@ -138,13 +148,25 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
           }}
         />
       )}
+
+      {/* Search by Styles */}
       {searchParams.searchType === SEARCH_STYLES && (
         <InputField
           label="Select Style:"
           listItems={styles}
           selectedOption={styles.indexOf(searchParams.style)}
-          onChange={(newVal: number) => {
-            setSearchParams({ ...searchParams, style: styles[newVal] });
+          onChange={(newIdx: number) => {
+            setSearchParams({ ...searchParams, style: styles[newIdx] });
+          }}
+        />
+      )}
+      {searchParams.style !== "" && (
+        <InputField
+          label="Select Category Combo:"
+          listItems={combos}
+          selectedOption={combos.indexOf(searchParams.category)}
+          onChange={(newIdx: number) => {
+            setSearchParams({ ...searchParams, category: combos[newIdx] });
           }}
         />
       )}

@@ -1,1 +1,1 @@
-export * from "./StylesCategories";
+export * from "./GetStylesCategories";
