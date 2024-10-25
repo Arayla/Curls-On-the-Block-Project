@@ -94,6 +94,10 @@ export async function Search(
   // Search categories only takes one
   if (searchParams.searchType === SEARCH_CATEGORIES)
     listCategories = [searchParams.category];
+  else
+    listCategories = searchParams.category
+      .split(",")
+      .map((category) => category.trim()); // Split by comma and remove extra spaces
   console.log(listCategories);
 
   let results: Array<Product> = [];
