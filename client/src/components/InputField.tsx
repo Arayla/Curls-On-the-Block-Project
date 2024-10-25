@@ -7,6 +7,7 @@ interface InputFieldProps {
   onChange: (value: number) => void;
 }
 
+// Input field with dropdowns. Best way to change is to connect react setter and input the react state as selectedOption.
 export const InputField: React.FC<InputFieldProps> = ({
   label,
   listItems,

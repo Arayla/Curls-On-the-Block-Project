@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// Try to keep API calls segregated to the services/ directory. Also, keep API URLs under types/api.ts for consistency and organization
 async function callServer(
   setStyles: React.Dispatch<React.SetStateAction<Array<{ style_name: string }>>>
 ): Promise<void> {
@@ -18,6 +19,25 @@ async function callServer(
     console.error("Error calling server:", error);
   }
 }
+
+/* 
+If you want to pass properties to a functional child make an interface:
+
+interface ComponentProperties {
+  key: number;
+  innerText: string;
+}; 
+
+Then accept that interface as an object to your functional component:
+
+export const myComponent: React.FC<ComponentProperties> = ({
+  key: number,
+  innerText: string
+}) => {
+ // Function code
+ ...
+} 
+ */
 
 export function SampleComponent(): JSX.Element {
   // Declare a state variable to store the styles data

@@ -91,6 +91,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
   return (
     <>
       <div className="search-param-form">
+        {/* ----- Static List Fields ----- */}
         <InputField
           label="Select Porosity:"
           listItems={[
@@ -178,6 +179,8 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
             setSearchParams({ ...searchParams, searchType: newVal });
           }}
         />
+
+        {/* ----- Lists From API Calls ----- */}
         {/* Search by Category */}
         {searchParams.searchType === SEARCH_CATEGORIES && (
           <InputField
@@ -211,6 +214,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
           />
         )}
 
+        {/* Button only shows when search is ready */}
         {allSelected && (
           <button type="submit" onClick={handleSubmit}>
             Search

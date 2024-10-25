@@ -11,7 +11,6 @@ export async function getCombinationsForStyle(
   // Combos
   try {
     // Fetching data from the server
-    // This needs to be swapped to api.get and call with https but idk why that isnt working
     const response = await api.get(COMBOS_ENDPOINT, {
       params: {
         style_name: styleForQuery,

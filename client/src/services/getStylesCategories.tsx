@@ -9,13 +9,9 @@ export async function getStylesCategories(
   setCategories: React.Dispatch<React.SetStateAction<Array<string>>>,
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>
 ): Promise<void> {
-  //   const [loading, setLoading] = useState(true);
-  //   let otherIsLoading = true;
-
   // Styles
   try {
     // Fetching data from the server
-    // This needs to be swapped to api.get and call with https but idk why that isnt working
     const response = await api.get(STYLES_ENDPOINT);
 
     // Updating the state with the fetched data
