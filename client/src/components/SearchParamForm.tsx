@@ -29,6 +29,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
   const [categories, setCategories] = useState<Array<string>>(["Loading..."]);
   const [styles, setStyles] = useState<Array<string>>(["Loading..."]);
   const [combos, setCombos] = useState<Array<string>>([]);
+  const [allSelected, setAllSelected] = useState<boolean>(false);
 
   // useEffect hook to call the server when the component mounts
   useEffect(() => {
@@ -41,6 +42,10 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
     setSearchParams({ ...searchParams, category: "" });
     getCombinationsForStyle(searchParams.style, setCombos);
   }, [searchParams.style]);
+
+  useEffect(() => {
+    setAllSelected(isAllSelected());
+  }, [searchParams]);
 
   // Convenience function which will use the user's input index to set the state of a string property in searchParams
   const setStringParamFromInputIdx = (
@@ -59,8 +64,27 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
     setSearchParams({ ...searchParams, [propToSet]: newStr });
   };
 
+  // Checks if everything is selected
+  const isAllSelected = () => {
+    if (searchParams.searchType === SEARCH_CATEGORIES) {
+      return (
+        // check if everything is selected
+        searchParams.porosity !== 0 &&
+        searchParams.courseness !== 0 &&
+        searchParams.thickness !== 0 &&
+        searchParams.curlType !== 0 &&
+        searchParams.length !== 0 &&
+        searchParams.category !== ""
+      );
+    } else if (searchParams.searchType === SEARCH_STYLES) {
+      return searchParams.style !== "" && searchParams.category !== ""; // Check if style and categories are selected
+    }
+
+    return false;
+  };
+
+  // Handle submission
   const handleSubmit = () => {
-    console.log("Submitted");
     Search(searchParams, setResults, categories);
   };
 
@@ -186,9 +210,12 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
             }}
           />
         )}
-        <button type="submit" onClick={handleSubmit}>
-          Search
-        </button>
+
+        {allSelected && (
+          <button type="submit" onClick={handleSubmit}>
+            Search
+          </button>
+        )}
       </div>
     </>
   );
