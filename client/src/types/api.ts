@@ -1,14 +1,13 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://localhost:8000",
+  baseURL: "http://localhost:8000",
 });
 
-// http://localhost:8000/styles
+// endpoint extensions
 export const STYLES_ENDPOINT = "/styles";
-// http://localhost:8000/categories
 export const CATEGORIES_ENDPOINT = "/categories";
-// http://localhost:8000/combinations;
 export const COMBOS_ENDPOINT = "/combinations";
+export const SEARCH_ENDPOINT = "/products/search";
 
 export {};

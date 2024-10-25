@@ -1,13 +1,13 @@
-import { useState } from "react";
-import axios from "axios";
-import { STYLES_ENDPOINT, CATEGORIES_ENDPOINT } from "../types";
+import React from "react";
+import { api, STYLES_ENDPOINT, CATEGORIES_ENDPOINT } from "../types";
 
 //
 // Get styles and categories to populate dropdowns. Should be set on component mount
 //
 export async function getStylesCategories(
   setStyles: React.Dispatch<React.SetStateAction<Array<string>>>,
-  setCategories: React.Dispatch<React.SetStateAction<Array<string>>>
+  setCategories: React.Dispatch<React.SetStateAction<Array<string>>>,
+  setLoading?: React.Dispatch<React.SetStateAction<boolean>>
 ): Promise<void> {
   //   const [loading, setLoading] = useState(true);
   //   let otherIsLoading = true;
@@ -16,11 +16,7 @@ export async function getStylesCategories(
   try {
     // Fetching data from the server
     // This needs to be swapped to api.get and call with https but idk why that isnt working
-    const response = await axios.get("http://localhost:8000/styles", {
-      params: {
-        table: "styles",
-      },
-    });
+    const response = await api.get(STYLES_ENDPOINT);
 
     // Updating the state with the fetched data
     let stringArr: Array<string> = response.data.map(
@@ -36,11 +32,7 @@ export async function getStylesCategories(
   // Categories
   try {
     // Fetching data from the server
-    const response = await axios.get("http://localhost:8000/categories", {
-      params: {
-        table: "categories",
-      },
-    });
+    const response = await api.get(CATEGORIES_ENDPOINT);
 
     // Updating the state with the fetched data
     let stringArr: Array<string> = response.data.map(
@@ -52,6 +44,8 @@ export async function getStylesCategories(
   } catch (error) {
     console.error("Error calling server for categories:", error);
   }
+
+  if (setLoading) setLoading(false);
 }
 
 export {};

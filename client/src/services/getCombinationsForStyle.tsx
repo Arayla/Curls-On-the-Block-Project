@@ -1,6 +1,4 @@
-import { useState } from "react";
-import axios from "axios";
-import { STYLES_ENDPOINT, CATEGORIES_ENDPOINT } from "../types";
+import { api, COMBOS_ENDPOINT } from "../types";
 
 //
 // Get styles and categories to populate dropdowns. Should be set on component mount
@@ -14,7 +12,7 @@ export async function getCombinationsForStyle(
   try {
     // Fetching data from the server
     // This needs to be swapped to api.get and call with https but idk why that isnt working
-    const response = await axios.get("http://localhost:8000/combinations", {
+    const response = await api.get(COMBOS_ENDPOINT, {
       params: {
         style_name: styleForQuery,
       },
