@@ -5,8 +5,10 @@ export const api = axios.create({
 });
 
 // http://localhost:8000/styles
-// http://localhost:8000/categories
 export const STYLES_ENDPOINT = "/styles";
+// http://localhost:8000/categories
 export const CATEGORIES_ENDPOINT = "/categories";
+// http://localhost:8000/combinations;
+export const COMBOS_ENDPOINT = "/combinations";
 
 export {};

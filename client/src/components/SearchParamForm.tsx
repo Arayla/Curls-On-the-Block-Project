@@ -6,8 +6,11 @@ import {
   SEARCH_CATEGORIES,
   SEARCH_STYLES,
 } from "../types";
-import { getStylesCategories } from "../services";
-import Search from "../services/Search";
+import {
+  Search,
+  getCombinationsForStyle,
+  getStylesCategories,
+} from "../services";
 import { Product } from "../types";
 
 // Props passed to component
@@ -36,8 +39,25 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
   // call the server for combos when styles is changed
   useEffect(() => {
     setSearchParams({ ...searchParams, category: "" });
-    // get;
-  }, [styles]);
+    getCombinationsForStyle(searchParams.style, setCombos);
+  }, [searchParams.style]);
+
+  // Convenience function which will use the user's input index to set the state of a string property in searchParams
+  const setStringParamFromInputIdx = (
+    propToSet: keyof SearchParams,
+    strArr: Array<string>,
+    newIdx: number
+  ) => {
+    let newStr;
+    if (newIdx === 0) {
+      // Base option
+      newStr = "";
+    } else {
+      newStr = strArr[newIdx];
+    }
+    // Setter fxn
+    setSearchParams({ ...searchParams, [propToSet]: newStr });
+  };
 
   const handleSubmit = () => {
     console.log("Submitted");
@@ -140,11 +160,8 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
             label="Select Category:"
             listItems={categories}
             selectedOption={categories.indexOf(searchParams.category)}
-            onChange={(newVal: number) => {
-              setSearchParams({
-                ...searchParams,
-                category: categories[newVal],
-              });
+            onChange={(newIdx: number) => {
+              setStringParamFromInputIdx("category", categories, newIdx);
             }}
           />
         )}
@@ -155,7 +172,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
             listItems={styles}
             selectedOption={styles.indexOf(searchParams.style)}
             onChange={(newIdx: number) => {
-              setSearchParams({ ...searchParams, style: styles[newIdx] });
+              setStringParamFromInputIdx("style", styles, newIdx);
             }}
           />
         )}
@@ -165,7 +182,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
             listItems={combos}
             selectedOption={combos.indexOf(searchParams.category)}
             onChange={(newIdx: number) => {
-              setSearchParams({ ...searchParams, category: combos[newIdx] });
+              setStringParamFromInputIdx("category", combos, newIdx);
             }}
           />
         )}

@@ -26,6 +26,8 @@ export async function getStylesCategories(
     let stringArr: Array<string> = response.data.map(
       (item: { style_name: string }) => item.style_name
     );
+
+    stringArr.unshift("Choose a style...");
     setStyles(stringArr);
   } catch (error) {
     console.error("Error calling server for styles:", error);
@@ -44,6 +46,8 @@ export async function getStylesCategories(
     let stringArr: Array<string> = response.data.map(
       (item: { category_name: string }) => item.category_name
     );
+
+    stringArr.unshift("Choose a category...");
     setCategories(stringArr);
   } catch (error) {
     console.error("Error calling server for categories:", error);
