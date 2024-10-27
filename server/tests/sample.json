@@ -1,0 +1,10 @@
+{
+  "porosity_val": 1.5,
+  "course_val": 1,
+  "density_val": 1,
+  "length_val": 1,
+  "curl_val": 1,
+  "category_val": "Shampoo",
+  "max_price": 100,
+  "max_po": 100
+}

@@ -9,6 +9,7 @@ x-common-variables: &common-variables
 services:
   mysql:
     image: mysql:5.7
+    platform: linux/amd64
     environment:
       <<: *common-variables
       MYSQL_HOST: localhost
