@@ -12,6 +12,7 @@ function App() {
     length: 0,
     category: "",
     style: "",
+    ingredientFiler: [],
   });
   const [products, setProducts] = useState<Array<Product>>([]);
 

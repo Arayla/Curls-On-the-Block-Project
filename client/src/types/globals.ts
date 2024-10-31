@@ -23,6 +23,7 @@ export interface SearchParams {
   length: number;
   category: string;
   style: string;
+  ingredientFiler: string[];
 }
 
 // Constants
