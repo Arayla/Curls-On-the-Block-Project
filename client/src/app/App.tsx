@@ -12,7 +12,7 @@ function App() {
     length: 0,
     category: "",
     style: "",
-    ingredientFiler: [],
+    ingredientFilter: [],
   });
   const [products, setProducts] = useState<Array<Product>>([]);
 

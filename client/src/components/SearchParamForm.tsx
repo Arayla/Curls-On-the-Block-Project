@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import InputField from "./InputField";
+import IngredientsChecklist from "./IngredientsChecklist"; // Import the checklist component
 import {
   SearchParams,
   SEARCH_NOT_SPECIFIED,
@@ -171,6 +172,23 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
             setSearchParams({ ...searchParams, length: newVal });
           }}
         />
+
+        {/* ----- Ingredients Checklist ----- */}
+        <IngredientsChecklist
+          label="Select Ingredients:"
+          ingredients={[
+            "Ingredient1",
+            "Ingredient2",
+            "Ingredient3",
+            "Ingredient4",
+            "Ingredient5",
+          ]}
+          selectedIngredients={searchParams.ingredientFilter} // Ensure this matches your SearchParams
+          onChange={(selected: string[]) => {
+            setSearchParams({ ...searchParams, ingredientFilter: selected });
+          }}
+        />
+
         <InputField
           label="Select a Search Type:"
           listItems={["Select a search type", "Style based", "Product based"]}
