@@ -1,4 +1,5 @@
 .root {
+  --Violet-40: #c595ff;
 }
 
 body {
@@ -8,7 +9,7 @@ body {
 .search-param-wrapper {
   margin: auto;
   display: grid;
-  width: 35%;
+  width: 500px;
   border: 2px;
   border-radius: 4px;
   box-shadow: 0px 0px 2px 2px grey;

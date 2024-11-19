@@ -41,22 +41,13 @@ export const InputRange: React.FC<InputRangeProps> = ({
             onChange={(event) => {
               setValue(Number(event.target.value));
             }}
-            list={`${key}-markers`}
           />
+
           <div className="input-range-postlabel" id={`${key}-postlabel`}>
             {value}
           </div>
         </div>
       </div>
-
-      <datalist id={`${key}-markers`}>
-        <option value="0" label="0"></option>
-        <option value="1" label="1"></option>
-        <option value="2" label="2"></option>
-        <option value="3" label="3"></option>
-        <option value="4" label="4"></option>
-        <option value="5" label="5"></option>
-      </datalist>
     </>
   );
 };
