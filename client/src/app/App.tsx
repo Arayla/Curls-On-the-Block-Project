@@ -1,5 +1,6 @@
+import "./App.css";
 import React, { useState, useEffect } from "react";
-import { SearchParamForm, ProductContainer } from "../components";
+import { SearchParamForm, ProductContainer, InputRange } from "../components";
 import { SearchParams, Product } from "../types";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     style: "",
   });
   const [products, setProducts] = useState<Array<Product>>([]);
+  const [test, setTest] = useState<number>(1);
 
   const ShowProducts = (products: Array<Product>) => {
     const productContainers: Array<JSX.Element> = [];
@@ -28,7 +30,15 @@ function App() {
   return (
     <>
       {/* Input selectors */}
-      <div>
+      <div className="search-param-wrapper">
+        <InputRange
+          name="test"
+          label="Select value:"
+          range={[0, 5]}
+          step={1}
+          value={test}
+          setValue={setTest}
+        />
         <SearchParamForm
           searchParams={searchParams}
           setSearchParams={setSearchParams}

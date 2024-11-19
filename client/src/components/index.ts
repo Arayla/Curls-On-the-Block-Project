@@ -3,3 +3,4 @@ export * from "./InputField";
 export * from "./ProductContainer";
 export * from "./SampleComponent";
 export * from "./SearchParamForm";
+export * from "./InputRange/InputRange";
