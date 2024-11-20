@@ -1,3 +1,4 @@
+import "./InputField.css";
 import React from "react";
 
 interface InputFieldProps {
