@@ -12,6 +12,7 @@ import {
   getStylesCategories,
 } from "../services";
 import { Product } from "../types";
+import { InputRange } from "./InputRange/InputRange";
 
 // Props passed to component
 interface SearchFormProps {
@@ -92,48 +93,33 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
     <>
       <div className="search-param-form">
         {/* ----- Static List Fields ----- */}
-        <InputField
+        <InputRange
+          name="porosity-slider"
           label="Select Porosity:"
-          listItems={[
-            "Select a value",
-            "Not very",
-            "Somewhat",
-            "Average",
-            "Above average",
-            "Very",
-          ]}
-          selectedOption={searchParams.porosity}
-          onChange={(newVal: number) => {
+          range={[1, 5]}
+          step={1}
+          value={searchParams.porosity}
+          setValue={(newVal: number) => {
             setSearchParams({ ...searchParams, porosity: newVal });
           }}
         />
-        <InputField
+        <InputRange
+          name="porosity-slider"
           label="Select Courseness:"
-          listItems={[
-            "Select a value",
-            "Not very",
-            "Somewhat",
-            "Average",
-            "Above average",
-            "Very",
-          ]}
-          selectedOption={searchParams.courseness}
-          onChange={(newVal: number) => {
+          range={[1, 5]}
+          step={1}
+          value={searchParams.courseness}
+          setValue={(newVal: number) => {
             setSearchParams({ ...searchParams, courseness: newVal });
           }}
         />
-        <InputField
+        <InputRange
+          name="thickness-slider"
           label="Select Thickness:"
-          listItems={[
-            "Select a value",
-            "Not very",
-            "Somewhat",
-            "Average",
-            "Above average",
-            "Very",
-          ]}
-          selectedOption={searchParams.thickness}
-          onChange={(newVal: number) => {
+          range={[1, 5]}
+          step={1}
+          value={searchParams.thickness}
+          setValue={(newVal: number) => {
             setSearchParams({ ...searchParams, thickness: newVal });
           }}
         />
@@ -156,18 +142,13 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
             setSearchParams({ ...searchParams, curlType: newVal });
           }}
         />
-        <InputField
-          label="Select Length:"
-          listItems={[
-            "Select a length",
-            "Short",
-            "Somewhat short",
-            "Average length",
-            "Long",
-            "Very long",
-          ]}
-          selectedOption={searchParams.length}
-          onChange={(newVal: number) => {
+        <InputRange
+          name="thickness-slider"
+          label="Select Thickness:"
+          range={[1, 5]}
+          step={1}
+          value={searchParams.length}
+          setValue={(newVal: number) => {
             setSearchParams({ ...searchParams, length: newVal });
           }}
         />

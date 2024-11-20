@@ -1,5 +1,6 @@
 import React from "react";
 import "./InputRange.css";
+import { SearchParams } from "../../types";
 
 interface InputRangeProps {
   name: string;
@@ -7,7 +8,7 @@ interface InputRangeProps {
   range: Array<number>;
   step: number;
   value: number;
-  setValue: React.Dispatch<React.SetStateAction<number>>;
+  setValue: (val: number) => void;
 }
 
 export const InputRange: React.FC<InputRangeProps> = ({

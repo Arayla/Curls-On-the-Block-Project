@@ -31,14 +31,6 @@ function App() {
     <>
       {/* Input selectors */}
       <div className="search-param-wrapper">
-        <InputRange
-          name="test"
-          label="Select value:"
-          range={[0, 5]}
-          step={1}
-          value={test}
-          setValue={setTest}
-        />
         <SearchParamForm
           searchParams={searchParams}
           setSearchParams={setSearchParams}
