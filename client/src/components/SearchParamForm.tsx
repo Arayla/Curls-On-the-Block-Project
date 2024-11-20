@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import InputField from "./InputField";
+import InputField from "./InputField/InputField";
 import {
   SearchParams,
   SEARCH_NOT_SPECIFIED,
