@@ -1,7 +1,7 @@
-import "./InputField.css";
+import "./Dropdown.css";
 import React from "react";
 
-interface InputFieldProps {
+interface DropdownProps {
   name: string;
   label: string;
   listItems: string[];
@@ -10,7 +10,7 @@ interface InputFieldProps {
 }
 
 // Input field with dropdowns. Best way to change is to connect react setter and input the react state as selectedOption.
-export const InputField: React.FC<InputFieldProps> = ({
+export const Dropdown: React.FC<DropdownProps> = ({
   name,
   label,
   listItems,
@@ -37,4 +37,4 @@ export const InputField: React.FC<InputFieldProps> = ({
   );
 };
 
-export default InputField;
+export default Dropdown;

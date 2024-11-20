@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import InputField from "./InputField/InputField";
+import Dropdown from "./Dropdown/Dropdown";
 import {
   SearchParams,
   SEARCH_NOT_SPECIFIED,
@@ -123,7 +123,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
             setSearchParams({ ...searchParams, thickness: newVal });
           }}
         />
-        <InputField
+        <Dropdown
           name="curl-type"
           label="Select Curl Type:"
           listItems={[
@@ -153,7 +153,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
             setSearchParams({ ...searchParams, length: newVal });
           }}
         />
-        <InputField
+        <Dropdown
           name="search-type"
           label="Select a Search Type:"
           listItems={["Select a search type", "Style based", "Product based"]}
@@ -166,7 +166,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
         {/* ----- Lists From API Calls ----- */}
         {/* Search by Category */}
         {searchParams.searchType === SEARCH_CATEGORIES && (
-          <InputField
+          <Dropdown
             name="category"
             label="Select Category:"
             listItems={categories}
@@ -178,7 +178,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
         )}
         {/* Search by Styles */}
         {searchParams.searchType === SEARCH_STYLES && (
-          <InputField
+          <Dropdown
             name="style"
             label="Select Style:"
             listItems={styles}
@@ -189,7 +189,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
           />
         )}
         {searchParams.style !== "" && (
-          <InputField
+          <Dropdown
             name="combo"
             label="Select Category Combo:"
             listItems={combos}
