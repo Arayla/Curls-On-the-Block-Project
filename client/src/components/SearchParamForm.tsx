@@ -91,6 +91,12 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
 
   return (
     <>
+      <div className="search-form-header">
+        <h4>
+          Search Curls Products
+          <i className="fa-solid fa-play"></i>
+        </h4>
+      </div>
       <div className="search-param-form">
         {/* ----- Static List Fields ----- */}
         <InputRange
@@ -201,11 +207,14 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
         )}
 
         {/* Button only shows when search is ready */}
-        {allSelected && (
-          <button type="submit" onClick={handleSubmit}>
-            Search
-          </button>
-        )}
+        <button
+          className={allSelected ? "button" : "button disabled"}
+          id="submit-button"
+          onClick={handleSubmit}
+          disabled={!allSelected}
+        >
+          Search
+        </button>
       </div>
     </>
   );
