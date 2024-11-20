@@ -124,6 +124,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
           }}
         />
         <InputField
+          name="curl-type"
           label="Select Curl Type:"
           listItems={[
             "Select a value",
@@ -153,6 +154,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
           }}
         />
         <InputField
+          name="search-type"
           label="Select a Search Type:"
           listItems={["Select a search type", "Style based", "Product based"]}
           selectedOption={searchParams.searchType}
@@ -165,6 +167,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
         {/* Search by Category */}
         {searchParams.searchType === SEARCH_CATEGORIES && (
           <InputField
+            name="category"
             label="Select Category:"
             listItems={categories}
             selectedOption={categories.indexOf(searchParams.category)}
@@ -176,6 +179,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
         {/* Search by Styles */}
         {searchParams.searchType === SEARCH_STYLES && (
           <InputField
+            name="style"
             label="Select Style:"
             listItems={styles}
             selectedOption={styles.indexOf(searchParams.style)}
@@ -186,6 +190,7 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
         )}
         {searchParams.style !== "" && (
           <InputField
+            name="combo"
             label="Select Category Combo:"
             listItems={combos}
             selectedOption={combos.indexOf(searchParams.category)}
