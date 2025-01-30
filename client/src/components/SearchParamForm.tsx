@@ -93,8 +93,8 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
     <>
       <div className="search-form-header">
         <h4>
-          Search Curls Products
-          <i className="fa-solid fa-play"></i>
+          Search Curls Products &nbsp;
+          <i className="fa-solid fa-angle-down"></i>
         </h4>
       </div>
       <div className="search-param-form">

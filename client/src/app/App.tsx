@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { SearchParamForm, ProductContainer, InputRange } from "../components";
+import { SearchParamForm, ProductContainer } from "../components";
 import { SearchParams, Product } from "../types";
 
 function App() {

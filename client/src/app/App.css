@@ -35,3 +35,9 @@ body {
 
   background: var(--Violet-40, #c595ff);
 }
+
+.search-form-header {
+  display: grid;
+  /* grid-template-columns: max-content max-content;
+  justify-content: space-between; */
+}
