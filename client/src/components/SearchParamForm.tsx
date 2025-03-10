@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import InputField from "./InputField";
+import Dropdown from "./Dropdown/Dropdown";
 import {
   SearchParams,
   SEARCH_NOT_SPECIFIED,
@@ -12,6 +12,7 @@ import {
   getStylesCategories,
 } from "../services";
 import { Product } from "../types";
+import { InputRange } from "./InputRange/InputRange";
 
 // Props passed to component
 interface SearchFormProps {
@@ -90,54 +91,46 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
 
   return (
     <>
+      <div className="search-form-header">
+        <h4>
+          Search Curls Products &nbsp;
+          <i className="fa-solid fa-angle-down"></i>
+        </h4>
+      </div>
       <div className="search-param-form">
         {/* ----- Static List Fields ----- */}
-        <InputField
+        <InputRange
+          name="porosity-slider"
           label="Select Porosity:"
-          listItems={[
-            "Select a value",
-            "Not very",
-            "Somewhat",
-            "Average",
-            "Above average",
-            "Very",
-          ]}
-          selectedOption={searchParams.porosity}
-          onChange={(newVal: number) => {
+          range={[1, 5]}
+          step={1}
+          value={searchParams.porosity}
+          setValue={(newVal: number) => {
             setSearchParams({ ...searchParams, porosity: newVal });
           }}
         />
-        <InputField
+        <InputRange
+          name="porosity-slider"
           label="Select Courseness:"
-          listItems={[
-            "Select a value",
-            "Not very",
-            "Somewhat",
-            "Average",
-            "Above average",
-            "Very",
-          ]}
-          selectedOption={searchParams.courseness}
-          onChange={(newVal: number) => {
+          range={[1, 5]}
+          step={1}
+          value={searchParams.courseness}
+          setValue={(newVal: number) => {
             setSearchParams({ ...searchParams, courseness: newVal });
           }}
         />
-        <InputField
+        <InputRange
+          name="thickness-slider"
           label="Select Thickness:"
-          listItems={[
-            "Select a value",
-            "Not very",
-            "Somewhat",
-            "Average",
-            "Above average",
-            "Very",
-          ]}
-          selectedOption={searchParams.thickness}
-          onChange={(newVal: number) => {
+          range={[1, 5]}
+          step={1}
+          value={searchParams.thickness}
+          setValue={(newVal: number) => {
             setSearchParams({ ...searchParams, thickness: newVal });
           }}
         />
-        <InputField
+        <Dropdown
+          name="curl-type"
           label="Select Curl Type:"
           listItems={[
             "Select a value",
@@ -156,22 +149,18 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
             setSearchParams({ ...searchParams, curlType: newVal });
           }}
         />
-        <InputField
-          label="Select Length:"
-          listItems={[
-            "Select a length",
-            "Short",
-            "Somewhat short",
-            "Average length",
-            "Long",
-            "Very long",
-          ]}
-          selectedOption={searchParams.length}
-          onChange={(newVal: number) => {
+        <InputRange
+          name="thickness-slider"
+          label="Select Thickness:"
+          range={[1, 5]}
+          step={1}
+          value={searchParams.length}
+          setValue={(newVal: number) => {
             setSearchParams({ ...searchParams, length: newVal });
           }}
         />
-        <InputField
+        <Dropdown
+          name="search-type"
           label="Select a Search Type:"
           listItems={["Select a search type", "Style based", "Product based"]}
           selectedOption={searchParams.searchType}
@@ -183,7 +172,8 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
         {/* ----- Lists From API Calls ----- */}
         {/* Search by Category */}
         {searchParams.searchType === SEARCH_CATEGORIES && (
-          <InputField
+          <Dropdown
+            name="category"
             label="Select Category:"
             listItems={categories}
             selectedOption={categories.indexOf(searchParams.category)}
@@ -194,7 +184,8 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
         )}
         {/* Search by Styles */}
         {searchParams.searchType === SEARCH_STYLES && (
-          <InputField
+          <Dropdown
+            name="style"
             label="Select Style:"
             listItems={styles}
             selectedOption={styles.indexOf(searchParams.style)}
@@ -204,7 +195,8 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
           />
         )}
         {searchParams.style !== "" && (
-          <InputField
+          <Dropdown
+            name="combo"
             label="Select Category Combo:"
             listItems={combos}
             selectedOption={combos.indexOf(searchParams.category)}
@@ -215,11 +207,14 @@ export const SearchParamForm: React.FC<SearchFormProps> = ({
         )}
 
         {/* Button only shows when search is ready */}
-        {allSelected && (
-          <button type="submit" onClick={handleSubmit}>
-            Search
-          </button>
-        )}
+        <button
+          className={allSelected ? "button" : "button disabled"}
+          id="submit-button"
+          onClick={handleSubmit}
+          disabled={!allSelected}
+        >
+          Search
+        </button>
       </div>
     </>
   );

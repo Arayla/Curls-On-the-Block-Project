@@ -1,0 +1,68 @@
+.input-range-wrapper {
+  display: grid;
+  margin: auto;
+  width: 100%;
+  grid-template-columns: max-content auto;
+  justify-content: space-between;
+  align-content: center;
+
+  .input-range-label {
+    align-self: center;
+  }
+  .range-inner-wrapper {
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    grid-template-columns: 250px max-content;
+  }
+}
+
+input[type="range"] {
+  /* Remove browser styling */
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  align-content: center;
+}
+
+/* ------ Chromium browsers ------ */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 8px;
+  background: var(--Violet-40, #c595ff);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 16px;
+  height: 16px;
+  border: 4px solid var(--Violet-100, #592e8d);
+  border-radius: 50%;
+  background-color: var(--Violet-20, #e9d7ff);
+  cursor: pointer;
+  margin-top: -4px;
+}
+
+/* ------ Firefox ------ */
+input[type="range"]::-moz-range-track {
+  height: 8px;
+  border-radius: 8px;
+  background: var(--Violet-40, #c595ff);
+}
+
+input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 8px;
+  height: 8px;
+  border: 4px solid var(--Violet-100, #592e8d);
+  border-radius: 50%;
+  background-color: var(--Violet-20, #e9d7ff);
+  cursor: pointer;
+  margin-top: -4px;
+}

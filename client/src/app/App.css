@@ -1,0 +1,43 @@
+.root {
+  --Violet-40: #c595ff;
+}
+
+body {
+  padding: 1em;
+}
+
+.search-param-wrapper {
+  margin: auto;
+  display: grid;
+  width: 500px;
+  border: 2px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 2px 2px grey;
+  padding: 0.5em;
+}
+
+.button {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: var(--Violet-100, #592e8d);
+  color: white;
+  border: none;
+  border-radius: 12px;
+
+  display: grid;
+  justify-self: end;
+  margin-top: 0.5em;
+  margin-right: 2em;
+}
+
+.button.disabled {
+  cursor: default;
+
+  background: var(--Violet-40, #c595ff);
+}
+
+.search-form-header {
+  display: grid;
+  /* grid-template-columns: max-content max-content;
+  justify-content: space-between; */
+}
